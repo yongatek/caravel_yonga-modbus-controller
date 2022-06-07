@@ -38,15 +38,18 @@ set ::env(VERILOG_FILES) "\
 	$script_dir/../../verilog/rtl/user_project_wrapper.v"
 
 ## Clock configurations
-set ::env(CLOCK_PORT) "user_clock2"
-set ::env(CLOCK_NET) "mprj.clk"
+set ::env(CLOCK_PORT) "wb_clk_i"
+# set ::env(CLOCK_NET) ""
 
-set ::env(CLOCK_PERIOD) "10"
+set ::env(CLOCK_PERIOD) "20"
+
+set ::env(BASE_SDC_FILE) "$script_dir/../../sdc/user_project_wrapper.sdc"
 
 ## Internal Macros
 ### Macro PDN Connections
 set ::env(FP_PDN_MACRO_HOOKS) "\
-	mprj vccd1 vssd1"
+	Modbus_w_RegSpace_Controller_inst vccd1 vssd1 \
+	sram_inst vccd1 vssd1"
 
 ### Macro Placement
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro.cfg
@@ -54,16 +57,22 @@ set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro.cfg
 ### Black-box verilog and views
 set ::env(VERILOG_FILES_BLACKBOX) "\
 	$::env(CARAVEL_ROOT)/verilog/rtl/defines.v \
-	$script_dir/../../verilog/rtl/user_proj_example.v"
+	$script_dir/../../verilog/rtl/Modbus_w_RegSpace_Controller.v \
+	$script_dir/../../verilog/rtl/sky130_sram_1kbyte_1rw1r_32x256_8.v"
 
 set ::env(EXTRA_LEFS) "\
-	$script_dir/../../lef/user_proj_example.lef"
+	$script_dir/../../lef/Modbus_w_RegSpace_Controller.lef \
+	$script_dir/../../lef/sky130_sram_1kbyte_1rw1r_32x256_8.lef"
 
 set ::env(EXTRA_GDS_FILES) "\
-	$script_dir/../../gds/user_proj_example.gds"
+	$script_dir/../../gds/Modbus_w_RegSpace_Controller.gds \
+	$script_dir/../../gds/sky130_sram_1kbyte_1rw1r_32x256_8.gds"
 
 # set ::env(GLB_RT_MAXLAYER) 5
 set ::env(RT_MAX_LAYER) {met4}
+
+set ::env(LVS_CONNECT_BY_LABEL) 1
+set ::env(RUN_MAGIC_DRC) 0
 
 # disable pdn check nodes becuase it hangs with multiple power domains.
 # any issue with pdn connections will be flagged with LVS so it is not a critical check.

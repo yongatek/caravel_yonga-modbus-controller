@@ -69,7 +69,7 @@ setup: install check-env install_mcw openlane pdk-with-volare
 blocks=$(shell cd openlane && find * -maxdepth 0 -type d)
 .PHONY: $(blocks)
 $(blocks): % :
-	export CARAVEL_ROOT=$(CARAVEL_ROOT) && cd openlane && $(MAKE) $*
+	export CARAVEL_ROOT=$(CARAVEL_ROOT) && cd openlane && $(MAKE) $@
 
 dv_patterns=$(shell cd verilog/dv && find * -maxdepth 0 -type d)
 dv-targets-rtl=$(dv_patterns:%=verify-%-rtl)
