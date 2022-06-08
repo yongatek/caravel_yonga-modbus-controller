@@ -99,3 +99,6 @@ To run test, after installation you should run the command below, in caravel_yon
 make verify-modbus_test-rtl
 ```
 Installation guide can be found in [caravel_user_project directory](https://github.com/efabless/caravel_user_project/blob/main/docs/source/quickstart.rst).
+
+## Contributors
+- Burak Yakup Çakar
