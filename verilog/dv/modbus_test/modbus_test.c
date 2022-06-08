@@ -61,15 +61,16 @@ void main()
      /* Apply configuration */
     reg_mprj_xfer = 1;
     while (reg_mprj_xfer == 1)
+	    
+    // Wishbone base address: 0x30000000
+    // Write register address to LSB with 2 zeros padded left hand side
+    // Example: To write address 0x03, use address 0x3000000C
+	    
+    while ((*(volatile uint32_t*)0x30000000) != 0x00000001); // Read address 0x00 over and over and wait until modbus client writes 0x0001 in address 0x00
 
-    // Flag start of the test
-	reg_mprj_datal = 0x00000400;
-
-    while ((*(volatile uint32_t*)0x30000000) != 0x00000001);
-
-    (*(volatile uint32_t*)0x30000200) = 0x0000596f;
-    (*(volatile uint32_t*)0x30000204) = 0x00006e67;
-    (*(volatile uint32_t*)0x30000208) = 0x00006174;
-    (*(volatile uint32_t*)0x3000020C) = 0x0000656b;
+    (*(volatile uint32_t*)0x30000200) = 0x0000596f; // Write 0x596F in address 0x80
+    (*(volatile uint32_t*)0x30000204) = 0x00006e67; // Write 0x6E67 in address 0x81
+    (*(volatile uint32_t*)0x30000208) = 0x00006174; // Write 0x6174 in address 0x82
+    (*(volatile uint32_t*)0x3000020C) = 0x0000656b; // Write 0x656B in address 0x83
 
 }
