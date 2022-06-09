@@ -101,4 +101,8 @@ make verify-modbus_test-rtl
 Installation guide can be found in [caravel_user_project directory](https://github.com/efabless/caravel_user_project/blob/main/docs/source/quickstart.rst).
 
 ## Contributors
+With alphabetical order
+- Anas Ali Yahia
 - Burak Yakup Çakar
+- Hanım Ay
+- Rıfat Demircioğlu
